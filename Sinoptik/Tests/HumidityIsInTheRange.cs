@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using Sinoptik.Pages;
 using System;
@@ -10,33 +11,39 @@ using System.Threading.Tasks;
 
 namespace Sinoptik.Tests
 {
-    public static class HumidityIsInTheRange
+    public class HumidityIsInTheRange
     {
 
-        public static void CheckHumidity()
+        [Test]
+        [Description("Verifies if the humidity is in the specified range")]
+
+        [TestCase(0, 100)]
+
+        public void CheckHumidity(int humidityMin, int humidityMax)
         {
             IWebDriver driver = new ChromeDriver();
             HomePage home = new HomePage(driver);
 
             home.Goto();
 
+            IList<IWebElement> Humidity;
 
-            for (int i = 1; i < 7; i++)
+            //click all day links on by one, get humidities for each day and check if humidity values are in the specified range
+            for (int i = 1; i <= 7; i++)
             {
-                Thread.Sleep(1000);
-                Console.WriteLine(home.GetDayLinkByClassName($"bd{i}").Text);
-                IList<IWebElement> Humidity = home.GetHumidityElements($"bd{i}");
+                home.GetDayLinkByClassName($"bd{i}").Click();
+                Humidity = home.GetHumidityElements($"bd{i}");
 
                 foreach (var item in Humidity)
                 {
-                    Console.WriteLine(item.Text);
-                    Console.WriteLine("I am here");
+                    Assert.GreaterOrEqual(Convert.ToInt32(item.Text), humidityMin);
+                    Assert.LessOrEqual(Convert.ToInt32(item.Text), humidityMax);
                 }
             }
+            driver.Quit();
+
 
         }
-
-
 
     }
 }

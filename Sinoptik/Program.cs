@@ -17,7 +17,7 @@ namespace Sinoptik
     {
         static void Main(string[] args)
         {
-            HumidityIsInTheRange.CheckHumidity();
+
         }
         
     }

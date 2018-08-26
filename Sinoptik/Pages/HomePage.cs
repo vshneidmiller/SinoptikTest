@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Sinoptik.Pages
@@ -94,6 +95,7 @@ namespace Sinoptik.Pages
 
         public string GetSelectedTabId()
         {
+            Thread.Sleep(1000);
             string selectedTabId = driver.FindElement(By.XPath("//div[@id='blockDays']")).GetAttribute("class");
             return selectedTabId;
         }
@@ -107,7 +109,8 @@ namespace Sinoptik.Pages
 
         public IList<IWebElement> GetHumidityElements(string dayClassName)
         {
-            IList<IWebElement> Humidities = driver.FindElements(By.XPath($"//*[@class='{dayClassName}']/descendant::tr[7]//td"));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+            IList<IWebElement> Humidities = wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath($"//*[@id='{dayClassName}c']/descendant::tr[7]/td")));
             return Humidities;
         }
     }
