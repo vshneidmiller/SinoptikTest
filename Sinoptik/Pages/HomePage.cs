@@ -95,8 +95,8 @@ namespace Sinoptik.Pages
 
         public string GetSelectedTabId()
         {
-            Thread.Sleep(1000);
-            string selectedTabId = driver.FindElement(By.XPath("//div[@id='blockDays']")).GetAttribute("class");
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+            string selectedTabId = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@id='blockDays']"))).GetAttribute("class");
             return selectedTabId;
         }
 
