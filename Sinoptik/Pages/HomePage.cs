@@ -79,7 +79,7 @@ namespace Sinoptik.Pages
             return Preassures;
         }
 
-        public int[] GetPreassureValues(string day)
+        public int[] GetPressureValues(string day)
         {
             IList<IWebElement> Preassures = GetPreassureElements(day);
 

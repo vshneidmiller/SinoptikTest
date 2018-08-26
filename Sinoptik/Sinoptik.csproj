@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tests\HumidityIsInTheRange.cs" />
-    <Compile Include="Tests\PreassureWithinTheRange.cs" />
+    <Compile Include="Tests\PressureWithinTheRange.cs" />
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

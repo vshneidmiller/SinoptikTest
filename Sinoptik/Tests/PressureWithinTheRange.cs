@@ -11,7 +11,7 @@ using Sinoptik;
 
 namespace Tests
 {
-    public class PreassureWithinTheRange
+    public class PressureWithinTheRange
     {
         [Test]
         [Description("Verifies if the preassure is in the specified range")]
@@ -20,7 +20,7 @@ namespace Tests
         [TestCase("Суббота", "Яремче", 600, 750)]
         [TestCase("Среда", "Ворохта", 600, 750)]
 
-        public void CheckPreassure(string day, string city, int preassureFrom, int preassureTo)
+        public void CheckPressure(string day, string city, int pressureFrom, int pressureTo)
         {
             IWebDriver driver = new ChromeDriver();
             HomePage home = new HomePage(driver);
@@ -30,7 +30,7 @@ namespace Tests
             home.GetDayLinkByDayName(day).Click();
 
             Assert.AreEqual(home.GetSelectedTabId(), home.GetIdByDayName(day));
-            Assert.IsTrue(home.IsInRange(preassureFrom, preassureTo, home.GetPreassureValues(day)));
+            Assert.IsTrue(home.IsInRange(pressureFrom, pressureTo, home.GetPressureValues(day)));
 
             driver.Quit();
 
